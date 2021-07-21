@@ -1,0 +1,20 @@
+name: Deploy Nginx App
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Executing git pull and pm2 restart
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+        script:  cd /var/www/cicd/;rm -rf mean-app/;cd /srv/www/angular-cicd/; git pull origin master;node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build  --prod;cp  -r dist/. /var/www/cicd/;rm -rf dist;systemctl restart nginx;
