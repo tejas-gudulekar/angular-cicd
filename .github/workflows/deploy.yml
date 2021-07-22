@@ -17,4 +17,4 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script:  cd /var/www/cicd/;rm -rf mean-app/;cd /srv/www/angular-cicd/; git pull origin master;/root/.nvm/versions/node/v12.14.1/bin/node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build  --prod;cp  -r dist/. /var/www/cicd/;rm -rf dist;systemctl restart nginx;
+        script:  cd scripts;/bin/bash client_deploy.sh;
