@@ -17,4 +17,4 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script:  cd /root/scripts/; tmux new -d -s mysession "/bin/bash deploy_client.sh";
+        script:  cd /root/scripts/; tmux new-session -d -s mysession "./deploy_client.sh";
